@@ -1,31 +1,12 @@
-from typing import Union
-from pydantic import BaseModel
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from app.api.routes import users
 
+app=FastAPI()
 
-app = FastAPI()
-
-
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
-class Item(BaseModel):
-    name: str
-    description: Union[str, None] = None
-    price: float
-    tax: Union[float, None] = None
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: Union[str, None] = None):
-    dict1 = {"name": "Amir", "age": 27,"address": {"city": "Mughar", "country": "Western Neighbourhood"}}
-    return dict1
+app.include_router(users.router,prefix="/api/v1/users")
 
 
 
-@app.post("/postitems")
-async def post_item(item: Item):
-    return JSONResponse({"name":item.name}, status_code=200)
-
-
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
