@@ -1,9 +1,10 @@
 from fastapi import FastAPI
-from app.api.routes import users
+from app.api.routes import user,customer
 
 app=FastAPI()
 
-app.include_router(users.router,prefix="/api/v1/users")
+app.include_router(user.router,prefix="/api/v1/user")
+app.include_router(customer.router,prefix="/api/v1/customer")
 
 
 
