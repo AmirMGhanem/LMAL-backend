@@ -1,4 +1,5 @@
 import os
+
 from pymongo import MongoClient
 
 class MongoDBClientSingleton:
@@ -7,12 +8,13 @@ class MongoDBClientSingleton:
     @classmethod
     def instance(cls):
         if cls._instance is None:
-            MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017/")
+            MONGO_URL = os.getenv("ATLAS_URI", "mongodb://localhost:27017/")
             cls._instance = MongoClient(MONGO_URL)
         return cls._instance
 
 
 def get_db():
     client = MongoDBClientSingleton.instance()
-    db = client["mydatabase"]
+    db_name=os.getenv("DB_NAME","mydatabase")
+    db = client[db_name]
     return db

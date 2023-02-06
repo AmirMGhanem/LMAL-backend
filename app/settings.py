@@ -15,7 +15,8 @@ DEBUG = False
 # Connect to the database
 
 MONGO_URL = os.environ.get("MONGO_URL")
-
+ATLAS_URI=os.environ.get("ATLAS_URI")
+DB_NAME=os.environ.get("DB_NAME")
 
 #CORS Policy
 CORS_HEADERS = 'Content-Type'

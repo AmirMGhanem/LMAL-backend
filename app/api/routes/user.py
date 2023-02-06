@@ -6,6 +6,10 @@ router = APIRouter()
 db = get_db()
 
 
+@router.get("/")
+async def hello_world():
+	return "hello world"
+
 @router.get("/get_all")
 async def get_all_users():
     result= select_all("user",is_json=True)
